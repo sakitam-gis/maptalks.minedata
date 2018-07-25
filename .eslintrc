@@ -1,0 +1,19 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module"
+    },
+    "extends": "maptalks",
+    "globals": {
+        "minemap": true
+    },
+    "rules": {
+        "no-var": "error",
+        "prefer-const": "error"
+    }
+}

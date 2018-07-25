@@ -1,0 +1,60 @@
+{
+  "name": "maptalks.minedata",
+  "version": "0.0.1",
+  "description": "A plugin for maptalks",
+  "author": "sakitam-fdd <smilefdd@gmail.com>",
+  "homepage": "",
+  "private": false,
+  "main": "dist/maptalks.minedata.js",
+  "module": "dist/maptalks.minedata.mjs",
+  "unpkg": "dist/maptalks.minedata.js",
+  "jsnext:main": "dist/maptalks.minedata.mjs",
+  "namespace": "maptalks",
+  "scripts": {
+    "version": "gulp minify && git add -A dist",
+    "preversion": "npm test",
+    "test": "gulp test",
+    "pretest": "npm run lint",
+    "lint": "eslint index.js test/**/*.js",
+    "prepublish": "npm run lint && gulp minify"
+  },
+  "dependencies": {
+    "maptalks": "^0.40.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.3",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-maptalks": "^0.3.0",
+    "eslint-plugin-mocha": "^5.0.0",
+    "expect-maptalks": "^0.4.1",
+    "expect.js": "^0.3.1",
+    "gulp": "^3.9.1",
+    "happen": "^0.3.2",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-expect": "^1.1.3",
+    "karma-expect-maptalks": "^0.1.5",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-happen": "^0.1.0",
+    "karma-ie-launcher": "^1.0.0",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.5",
+    "maptalks-build-helpers": "^0.5.0",
+    "minimist": "^1.2.0",
+    "mocha": "^5.2.0"
+  },
+  "peerDependencies": {
+    "maptalks": "^0.40.4"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "license": "MIT"
+}
