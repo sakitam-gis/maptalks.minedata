@@ -10,12 +10,14 @@ A plugin to add [minedata](http://www.minedata.cn/index)
 
 ## Install
   
-* Install with npm: ```npm install maptalks.minedata```. 
-* Use unpkg CDN: ```https://unpkg.com/maptalks.minedata/dist/maptalks.minedatamin.js```
+* Install with npm: ```npm install @sakitam-gis/maptalks.minedata```. 
+* Use unpkg CDN: ```https://unpkg.com/@sakitam-gis/maptalks.minedata/dist/maptalks.minedatamin.js```
 
 ## Usage
 
-As a plugin, `maptalks.minedata` must be loaded after `maptalks.js` and `minedata` in browsers.
+As a plugin, `maptalks.minedata` must be loaded after `maptalks.js` 
+and `minedata` in browsers.
+
 ```html
 <div id="map"></div>
 <script src="../lib/minemap.js"></script>
