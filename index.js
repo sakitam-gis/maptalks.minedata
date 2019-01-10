@@ -1,10 +1,10 @@
 import * as maptalks from 'maptalks';
 
 const options = {
-    'renderer' : 'dom',
-    'container' : 'back',
-    'glOptions' : {
-        'style' : '//minedata.cn/service/solu/style/id/2365'
+    'renderer': 'dom',
+    'container': 'back',
+    'glOptions': {
+        'style': '//minedata.cn/service/solu/style/id/2365'
     }
 };
 
@@ -17,12 +17,14 @@ export class MineLayer extends maptalks.Layer {
      * @private
      * @function
      */
-    static fromJSON(json) {
-        if (!json || json['type'] !== 'MineLayer') { return null; }
+    static fromJSON (json) {
+        if (!json || json['type'] !== 'MineLayer') {
+            return null;
+        }
         return new MineLayer(json['id'], json['options']);
     }
 
-    getGlMap() {
+    getGlMap () {
         const renderer = this._getRenderer();
         if (renderer) {
             return renderer.glmap;
@@ -34,7 +36,7 @@ export class MineLayer extends maptalks.Layer {
      * Export the MineLayer's JSON.
      * @return {Object} layer's JSON
      */
-    toJSON() {
+    toJSON () {
         return {
             'type': this.getJSONType(),
             'id': this.getId(),
@@ -49,32 +51,32 @@ MineLayer.registerJSONType('MineLayer');
 
 MineLayer.registerRenderer('dom', class {
 
-    constructor(layer) {
+    constructor (layer) {
         this.layer = layer;
     }
 
-    getMap() {
+    getMap () {
         if (!this.layer) {
             return null;
         }
         return this.layer.getMap();
     }
 
-    show() {
+    show () {
         if (this._container) {
             this.render();
             this._show();
         }
     }
 
-    hide() {
+    hide () {
         if (this._container) {
             this._hide();
             this.clear();
         }
     }
 
-    remove() {
+    remove () {
         delete this.layer;
         if (this.glmap) {
             this.glmap.remove();
@@ -86,26 +88,26 @@ MineLayer.registerRenderer('dom', class {
         delete this.glmap;
     }
 
-    clear() {
+    clear () {
         if (this._container) {
             this._container.innerHTML = '';
         }
     }
 
-    setZIndex(z) {
+    setZIndex (z) {
         this._zIndex = z;
         if (this._container) {
             this._container.style.zIndex = z;
         }
     }
 
-    needToRedraw() {
+    needToRedraw () {
         const map = this.getMap();
         const renderer = map._getRenderer();
         return map.isInteracting() || renderer && renderer.isViewChanged();
     }
 
-    render() {
+    render () {
         if (!this._container) {
             this._createLayerContainer();
         }
@@ -125,7 +127,7 @@ MineLayer.registerRenderer('dom', class {
         this._syncMap();
     }
 
-    drawOnInteracting() {
+    drawOnInteracting () {
         const map = this.getMap();
         if (!this.glmap || !map) {
             return;
@@ -133,17 +135,17 @@ MineLayer.registerRenderer('dom', class {
         this._syncMap();
     }
 
-    getEvents() {
+    getEvents () {
         return {
-            'resize' : this.onResize
+            'resize': this.onResize
         };
     }
 
-    onResize() {
+    onResize () {
         this._resize();
     }
 
-    _createLayerContainer() {
+    _createLayerContainer () {
         const container = this._container = maptalks.DomUtil.createEl('div', 'maptalks-minelayer');
         container.style.cssText = 'position:absolute;';
         this._resize();
@@ -154,7 +156,7 @@ MineLayer.registerRenderer('dom', class {
         parent.appendChild(container);
     }
 
-    _resize() {
+    _resize () {
         const container = this._container;
         if (!container) {
             return;
@@ -168,26 +170,32 @@ MineLayer.registerRenderer('dom', class {
 
     }
 
-    _show() {
+    _show () {
         this._container.style.display = '';
     }
 
-    _hide() {
+    _hide () {
         this._container.style.display = 'none';
     }
 
-    _syncMap() {
+    _syncMap () {
         const map = this.getMap();
         if (!this.glmap || !map) {
             return;
         }
         const center = map.getCenter();
         const cameraOptions = {
-            'center' : new minemap.LngLat(center.x, center.y),
-            'zoom'   : map.getZoom() - 1,
-            'bearing' : map.getBearing(),
-            'pitch' : map.getPitch()
+            'center': new minemap.LngLat(center.x, center.y),
+            'zoom': getMapZoom(map.getResolution()),
+            'bearing': map.getBearing(),
+            'pitch': map.getPitch()
         };
         this.glmap.jumpTo(cameraOptions);
     }
 });
+
+const MAX_RES = 2 * 6378137 * Math.PI / (256 * Math.pow(2, 20));
+
+function getMapZoom (res) {
+    return 19 - Math.log(res / MAX_RES) / Math.LN2;
+}
