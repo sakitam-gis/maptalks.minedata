@@ -4,7 +4,6 @@
   "description": "A plugin for maptalks",
   "author": "sakitam-fdd <smilefdd@gmail.com>",
   "homepage": "",
-  "private": false,
   "main": "dist/maptalks.minedata.js",
   "module": "dist/maptalks.minedata.mjs",
   "unpkg": "dist/maptalks.minedata.js",

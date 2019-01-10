@@ -11,7 +11,7 @@ A plugin to add [minedata](http://www.minedata.cn/index)
 ## Install
   
 * Install with npm: ```npm install @sakitam-gis/maptalks.minedata```. 
-* Use unpkg CDN: ```https://unpkg.com/@sakitam-gis/maptalks.minedata/dist/maptalks.minedatamin.js```
+* Use unpkg CDN: ```https://unpkg.com/@sakitam-gis/maptalks.minedata/dist/maptalks.minedata.min.js```
 
 ## Usage
 
