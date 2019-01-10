@@ -3,7 +3,9 @@ const gulp = require('gulp');
 const pkg = require('./package.json');
 const BundleHelper = require('maptalks-build-helpers').BundleHelper;
 const Server = require('karma').Server;
-const bundleHelper = new BundleHelper(pkg);
+const bundleHelper = new BundleHelper(Object.assign(pkg, {
+    name: 'maptalks.minedata'
+}));
 
 gulp.task('build', () => {
     return bundleHelper.bundle('index.js');

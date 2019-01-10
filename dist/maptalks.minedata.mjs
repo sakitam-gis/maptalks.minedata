@@ -1,7 +1,7 @@
 /*!
  * maptalks.minedata v0.0.1
  * LICENSE : MIT
- * (c) 2016-2018 maptalks.org
+ * (c) 2016-2019 maptalks.org
  */
 /*!
  * requires maptalks@^0.40.4 
@@ -202,7 +202,7 @@ MineLayer.registerRenderer('dom', function () {
         var center = map.getCenter();
         var cameraOptions = {
             'center': new minemap.LngLat(center.x, center.y),
-            'zoom': map.getZoom() - 1,
+            'zoom': getMapZoom(map.getResolution()),
             'bearing': map.getBearing(),
             'pitch': map.getPitch()
         };
@@ -211,6 +211,12 @@ MineLayer.registerRenderer('dom', function () {
 
     return _class;
 }());
+
+var MAX_RES = 2 * 6378137 * Math.PI / (256 * Math.pow(2, 20));
+
+function getMapZoom(res) {
+    return 19 - Math.log(res / MAX_RES) / Math.LN2;
+}
 
 export { MineLayer };
 
