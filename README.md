@@ -1,5 +1,7 @@
 # maptalks.minedata
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/sakitam-gis/maptalks.minedata.svg)](https://greenkeeper.io/)
+
 
 A plugin to add [minedata](http://www.minedata.cn/index)
  as a layer for [maptalks.js](https://github.com/maptalks/maptalks.js).
